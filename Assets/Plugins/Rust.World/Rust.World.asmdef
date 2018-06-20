@@ -1,0 +1,10 @@
+{
+    "name": "Rust.World",
+    "references": [
+        "Facepunch.System"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
