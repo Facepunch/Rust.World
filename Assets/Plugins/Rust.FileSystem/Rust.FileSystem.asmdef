@@ -1,0 +1,10 @@
+{
+    "name": "NewAssembly",
+    "references": [
+        "Facepunch.System"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

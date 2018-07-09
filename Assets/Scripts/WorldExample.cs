@@ -5,8 +5,12 @@ using System.Text;
 
 public class WorldExample : MonoBehaviour
 {
+	private string bundlename = string.Empty;
 	private string filename = string.Empty;
 	private string result = string.Empty;
+
+	private WorldSerialization world;
+	private PrefabLookup prefabs;
 
 	private WorldSerialization LoadWorld(string filename)
 	{
@@ -159,6 +163,20 @@ public class WorldExample : MonoBehaviour
 		return sb.ToString();
 	}
 
+	private void SpawnPrefabs(WorldSerialization blob, PrefabLookup prefabs)
+	{
+		foreach (var prefab in blob.world.prefabs)
+		{
+			var go = GameObject.Instantiate(prefabs[prefab.id], prefab.position, prefab.rotation);
+
+			if (go)
+			{
+				go.transform.localScale = prefab.scale;
+				go.SetActive(true);
+			}
+		}
+	}
+
 	protected void OnGUI()
 	{
 		const float padding = 10;
@@ -167,16 +185,79 @@ public class WorldExample : MonoBehaviour
 		GUILayout.BeginVertical();
 
 		GUILayout.BeginHorizontal();
-		GUILayout.Label("Map File");
-		filename = GUILayout.TextField(filename, GUILayout.MinWidth(100));
-		#if UNITY_EDITOR
-		if (GUILayout.Button("Browse")) filename = UnityEditor.EditorUtility.OpenFilePanel("Select Map File", filename, "map");
-		#endif
-		if (GUILayout.Button("Load")) result = GetInfo(LoadWorld(filename));
-		GUILayout.FlexibleSpace();
+		{
+			GUILayout.Label("Map File");
+
+			filename = GUILayout.TextField(filename, GUILayout.MinWidth(100));
+
+			#if UNITY_EDITOR
+			if (GUILayout.Button("Browse"))
+			{
+				filename = UnityEditor.EditorUtility.OpenFilePanel("Select Map File", filename, "map");
+				world = LoadWorld(filename);
+			}
+			#endif
+
+			if (GUILayout.Button("Load"))
+			{
+				world = LoadWorld(filename);
+			}
+
+			GUILayout.FlexibleSpace();
+		}
 		GUILayout.EndHorizontal();
 
-		GUILayout.TextArea(result);
+		GUILayout.BeginHorizontal();
+		if (world != null)
+		{
+			GUILayout.Label("Bundle File");
+
+			bundlename = GUILayout.TextField(bundlename, GUILayout.MinWidth(100));
+
+			#if UNITY_EDITOR
+			if (GUILayout.Button("Browse"))
+			{
+				bundlename = UnityEditor.EditorUtility.OpenFilePanel("Select Bundle File", bundlename, "");
+
+				if (prefabs != null)
+				{
+					prefabs.Dispose();
+					prefabs = null;
+				}
+
+				prefabs = new PrefabLookup(bundlename);
+			}
+			#endif
+
+			if (GUILayout.Button("Load"))
+			{
+				if (prefabs != null)
+				{
+					prefabs.Dispose();
+					prefabs = null;
+				}
+
+				prefabs = new PrefabLookup(bundlename);
+			}
+
+			GUILayout.FlexibleSpace();
+		}
+		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
+		if (world != null && prefabs != null)
+		{
+			GUILayout.Label("Tools");
+
+			if (GUILayout.Button("Print Map Info")) result = GetInfo(world);
+			if (GUILayout.Button("Clear Map Info")) result = string.Empty;
+			if (GUILayout.Button("Spawn Map Prefabs")) SpawnPrefabs(world, prefabs);
+
+			GUILayout.FlexibleSpace();
+		}
+		GUILayout.EndHorizontal();
+
+		if (!string.IsNullOrEmpty(result)) GUILayout.TextArea(result);
 
 		GUILayout.EndVertical();
 		GUILayout.EndArea();
