@@ -11,5 +11,5 @@ WARNING: Only use this extremely early version of the SDK if you enjoy pain and 
 
 ## Roadmap
 
-* Support loading assets from asset bundles that ship with the game
+* Fix shaders
 * Demonstrate how to work with path data in the map file
