@@ -7,9 +7,10 @@ WARNING: Only use this extremely early version of the SDK if you enjoy pain and 
 ## Getting Started
 
 * As of Unity 2018.1 you need to manually switch your project to the [.NET 4.x runtime](https://docs.unity3d.com/Manual/ScriptingRuntimeUpgrade.html) after creating it
+* Shaders on loaded prefabs are only working in the deferred rendering path (and currently only on Windows)
 * The `WorldExample` class demonstrates how to load and work with a map file
 
 ## Roadmap
 
-* Fix shaders
+* Fix shaders on macOS
 * Demonstrate how to work with path data in the map file
