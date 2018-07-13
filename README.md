@@ -14,3 +14,7 @@ WARNING: Only use this extremely early version of the SDK if you enjoy pain and 
 
 * Fix shaders on macOS
 * Demonstrate how to work with path data in the map file
+
+## Community
+
+https://forum.facepunch.com/f/rustmods
