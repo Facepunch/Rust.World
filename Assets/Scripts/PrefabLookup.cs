@@ -28,7 +28,7 @@ public class PrefabLookup : System.IDisposable
 
 		var asyncOperation = SceneManager.LoadSceneAsync(scenePath, LoadSceneMode.Additive);
 
-		scene = SceneManager.GetSceneByPath(scenePath);
+		scene = SceneManager.GetSceneAt(SceneManager.sceneCount - 1);
 
 		asyncOperation.completed += (operation) =>
 		{
