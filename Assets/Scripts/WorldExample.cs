@@ -247,11 +247,18 @@ public class WorldExample : MonoBehaviour
 		GUILayout.BeginHorizontal();
 		if (world != null && prefabs != null)
 		{
-			GUILayout.Label("Tools");
+			if (prefabs.isLoaded)
+			{
+				GUILayout.Label("Tools");
 
-			if (GUILayout.Button("Print Map Info")) result = GetInfo(world);
-			if (GUILayout.Button("Clear Map Info")) result = string.Empty;
-			if (GUILayout.Button("Spawn Map Prefabs")) SpawnPrefabs(world, prefabs);
+				if (GUILayout.Button("Print Map Info")) result = GetInfo(world);
+				if (GUILayout.Button("Clear Map Info")) result = string.Empty;
+				if (GUILayout.Button("Spawn Map Prefabs")) SpawnPrefabs(world, prefabs);
+			}
+			else
+			{
+				GUILayout.Label("Loading Prefabs...");
+			}
 
 			GUILayout.FlexibleSpace();
 		}
