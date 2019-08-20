@@ -24,10 +24,7 @@ public class BitUtility
 
 	public static short Float2Short(float f)
 	{
-		Union32 u = new Union32();
-		u.f = f;
-		u.b1 = 0;
-		return (short)(u.f * float2short + 0.5f);
+		return (short)(f * float2short + 0.5f);
 	}
 
 	public static float Short2Float(int b)

@@ -1,10 +1,16 @@
 {
     "name": "Rust.World",
     "references": [
-        "Facepunch.System"
+        "Facepunch.System",
+        "Rust.Data"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],
     "excludePlatforms": [],
-    "allowUnsafeCode": false
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
 }
