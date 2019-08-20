@@ -167,13 +167,16 @@ public class WorldExample : MonoBehaviour
 	{
 		foreach (var prefab in blob.world.prefabs)
 		{
-			var go = GameObject.Instantiate(prefabs[prefab.id], prefab.position, prefab.rotation);
+			var prefabGameObject = prefabs[prefab.id];
 
-			if (go)
-			{
-				go.transform.localScale = prefab.scale;
-				go.SetActive(true);
-			}
+			if (!prefabGameObject) continue;
+
+			var instanceGameObject = GameObject.Instantiate(prefabGameObject, prefab.position, prefab.rotation);
+
+			if (!instanceGameObject) continue;
+
+			instanceGameObject.transform.localScale = prefab.scale;
+			instanceGameObject.SetActive(true);
 		}
 	}
 

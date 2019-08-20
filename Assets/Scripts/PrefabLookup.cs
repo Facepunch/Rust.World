@@ -58,10 +58,7 @@ public class PrefabLookup : System.IDisposable
 		{
 			GameObject res = null;
 
-			if (!prefabs.TryGetValue(uid, out res))
-			{
-				throw new System.Exception("Prefab not found: " + uid + " - assets not fully loaded yet?");
-			}
+			prefabs.TryGetValue(uid, out res);
 
 			return res;
 		}
